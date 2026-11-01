@@ -73,6 +73,10 @@ class Whisper(asr_model.AsrModel):
     self._decoder = WhisperDecoder(self._model).eval()
     self._processor = asr_model.TransformersProcessor(model_id)
 
+  def get_hf_model(self) -> transformers.WhisperForConditionalGeneration:
+    """Returns the HF model whose weights the encoder/decoder wrappers share."""
+    return self._model
+
   def get_encoder(self) -> torch.nn.Module:
     return self._encoder
 
